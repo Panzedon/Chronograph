@@ -1,10 +1,5 @@
 # ⚡ Хронограф для страйкбола / Airsoft Chronograph
 
-![GitHub repo size](https://img.shields.io/github/repo-size/USERNAME/REPO_NAME?color=blue)
-![GitHub language count](https://img.shields.io/github/languages/count/USERNAME/REPO_NAME)
-![GitHub top language](https://img.shields.io/github/languages/top/USERNAME/REPO_NAME?color=yellow)
-![GitHub last commit](https://img.shields.io/github/last-commit/USERNAME/REPO_NAME?color=green)
-
 [🇺🇦 Українська](#-українська) | [🇬🇧 English](#-english)
 
 ---
