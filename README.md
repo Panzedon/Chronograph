@@ -30,8 +30,8 @@
 
 ### 📂 Структура проєкту
 
-/Altium – принципова схема та плата (Altium Designer)
-/VsCode – середовище розробки на VS Code, у якому можна програмувати та заливати прошивку у мікроконтролер (C, COSMIC, stm8flash, ST-LINK)
+- Altium – принципова схема та плата (Altium Designer)
+- VsCode – середовище розробки на VS Code, у якому можна програмувати та заливати прошивку у мікроконтролер (C, COSMIC, stm8flash, ST-LINK)
 
 
 ✍️ **Автор:** Матвій Шульга
@@ -65,8 +65,8 @@ Powered via **USB Type-C**, uses **two laser beams** to detect BB flight.
 ### 📂 Project structure
 
 
-/Altium – schematics and PCB (Altium Designer)
-/VsCode – development environment in VS Code, where you can program and flash firmware to the microcontroller (C, COSMIC, stm8flash, ST-LINK)
+- Altium – schematics and PCB (Altium Designer)
+- VsCode – development environment in VS Code, where you can program and flash firmware to the microcontroller (C, COSMIC, stm8flash, ST-LINK)
 
 
 ✍️ **Developed by:** Matvei Shulga
