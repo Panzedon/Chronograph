@@ -18,7 +18,7 @@
 - ⚡ **Миттєвий розрахунок:** при пострілі система одночасно обчислює швидкість, енергію та скорострільність.
 
 ### 🔧 Керування
-- 🔴 **Ліва кнопка (Кнопка 1)** — вмикає/вимикає ІЧ-промені.
+- 🔴 **Ліва кнопка (Кнопка 1)** — вмикає/вимикає семисегментний індикатор.
 - 🔵 **Права кнопка (Кнопка 2):**
     - **Коротке натискання** — перемикання між режимами відображення (Швидкість / Енергія / Скорострільність).
     - **Довге утримання** — перехід у режим **задання ваги кульки** (у грамах). 
@@ -56,7 +56,7 @@ Powered via **USB Type-C**, uses **two IR (Infrared) beams** to detect BB flight
 - ⚡ **Instant calculation:** a single shot triggers simultaneous calculation of velocity, energy, and rate of fire.
 
 ### 🔧 Controls
-- 🔴 **Left Button (Button 1)** — IR beams power on/off.
+- 🔴 **Left Button (Button 1)** — LED indicator power on/off.
 - 🔵 **Right Button (Button 2):**
     - **Short press** — toggles between display modes (Velocity / Energy / Rate of Fire).
     - **Long hold** — enters **BB weight setting mode** (in grams).
