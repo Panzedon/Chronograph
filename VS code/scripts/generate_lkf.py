@@ -11,6 +11,9 @@ def get_object_files():
     obj_files = []
     for file in os.listdir(SRC_DIR):
         if file.endswith(".c"):
+            # Исключаем вектор из общего списка, чтобы он не дублировался
+            if file == "stm8_interrupt_vector.c":
+                continue
             obj_name = file.replace(".c", ".o")
             obj_path = os.path.join(SRC_DIR, obj_name)  
             obj_files.append(obj_path.replace("/", "\\"))
@@ -34,33 +37,33 @@ def generate_lkf(object_files):
     lkf.append("+seg .bss -a .data  -n .bss ")
     lkf.append("")
 
-    # Startup файл
+    # Startup файл (для модели +mods0)
     lkf.append("#<BEGIN STARTUP_FILE>")
     lkf.append(r'"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\crtsi0.sm8"')
     lkf.append("#<END STARTUP_FILE>")
     lkf.append("")
 
-    # Object файлы
+    # Object файлы (основной код)
     lkf.append("#<BEGIN OBJECT_FILES>")
     for obj in object_files:
         lkf.append(obj)
     lkf.append("#<END OBJECT_FILES>")
     lkf.append("")
 
-    # Библиотеки
+    # Библиотеки (для модели +mods0)
     lkf.append("#<BEGIN LIBRARY_FILES>")
     lkf.append(r'"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libis0.sm8"')
     lkf.append(r'"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\lib\libm0.sm8"')
     lkf.append("#<END LIBRARY_FILES>")
     lkf.append("")
 
-    # Векторы
+    # Векторы (БЕЗ РЕШЕТКИ # в путях!)
     lkf.append("#<BEGIN VECTOR_FILE>")
     lkf.append("+seg .const -b 0x8000 -k")
     if MODE == "debug":
-        lkf.append(r"#Debug\stm8_interrupt_vector.o")
+        lkf.append(r"Debug\stm8_interrupt_vector.o")
     else:
-        lkf.append(r"#src\stm8_interrupt_vector.o")
+        lkf.append(r"src\stm8_interrupt_vector.o")
     lkf.append("#<END VECTOR_FILE>")
     lkf.append("")
 

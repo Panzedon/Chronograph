@@ -4,6 +4,7 @@
     {
       "label": "Run",
       "dependsOn": [
+        "Check Code (Cppcheck)",
         "Compile All",
         "Generate LKF (Run)",
         "Link STM8 with COSMIC",
@@ -17,10 +18,24 @@
     {
       "label": "Debug",
       "dependsOn": [
+        "Check Code (Cppcheck)",
         "Compile all (debug)",
         "Generate LKF (Debug)",
         "Link STM8 with COSMIC (debug)",
         "Convert OUT to ELF"
+      ],
+      "group": {
+        "kind": "build"
+      }
+    },
+    {
+      "label": "Build & Check (No Flash)",
+      "dependsOn": [
+        "Check Code (Cppcheck)", 
+        "Compile All",
+        "Generate LKF (Run)",
+        "Link STM8 with COSMIC",
+        "Convert SM8 to HEX"     
       ],
       "group": {
         "kind": "build"
@@ -181,6 +196,32 @@
           "executable": "cmd.exe",
           "args": ["/c"]
         }
+      }
+    },
+    {
+    "label": "Check Code (Cppcheck)",
+    "type": "shell",
+    "command": "C:/Tools/cppcheck.exe",
+    "args": [
+      "--enable=all",
+      "--std=c89",
+      "--inconclusive",
+      "--force",
+      "-I", "mocks",       // Сначала ищем тут (найдет наш фейк)
+      "-I", "include",     // Потом тут (найдет chrono.h и т.д.)
+      "src/"
+    ],
+      "problemMatcher": {
+      "owner": "cppcheck",
+      "fileLocation": ["relative", "${workspaceFolder}"],
+      "pattern": {
+        "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error|style|performance|portability|information):\\s+(.*)$",
+        "file": 1,
+        "line": 2,
+        "column": 3,
+        "severity": 4,
+        "message": 5
+      }
       }
     }
   ]

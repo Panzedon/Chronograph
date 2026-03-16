@@ -4,6 +4,9 @@
         "stm8s.h": "c",
         "iostm8s103.h": "c",
         "stm8s_gpio.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "time.h": "c",
+        "clock.h": "c",
+        "tm1637.h": "c"
     }
 }

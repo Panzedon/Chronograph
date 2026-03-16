@@ -1,7 +1,8 @@
 /*	IO DEFINITIONS FOR STM8 S103 covers F and K family
  *	Copyright (c) 2010 by COSMIC Software
  */
-
+#ifndef _IOSTM8S103_H_
+#define _IOSTM8S103_H_
 /*	PORTS section
  */
 /*	Port A
@@ -266,3 +267,5 @@ volatile char DM_CR2        @0x7f97;	/* IC Debugging Control register 2 */
 volatile char DM_CSR1       @0x7f98;	/* IC Debugging Control/Status reg 1 */
 volatile char DM_CSR2       @0x7f99;	/* IC Debugging Control/Status reg 2 */
 volatile char DM_ENFCTR     @0x7f9a;	/* IC Debugging Function Enable Reg 2 */
+
+#endif /* _IOSTM8S103_H_ */
