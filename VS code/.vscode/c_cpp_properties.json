@@ -2,24 +2,27 @@
     "configurations": [
         {
             "name": "COSMIC STM8",
-            "intelliSenseMode": "gcc-x86",
-            "cStandard": "c89",
             "includePath": [
-                "${workspaceFolder}/include",
-                "C:/Program Files (x86)/COSMIC/FSE_Compilers/CXSTM8/Lib",
-                "C:/Program Files (x86)/COSMIC/stsw-stm8069/STM8S_StdPeriph_Lib/Libraries/STM8S_StdPeriph_Driver/inc",
-                "C:/Program Files (x86)/COSMIC/stsw-stm8069/STM8S_StdPeriph_Lib/Libraries/STM8S_StdPeriph_Driver/src"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/tools/COSMIC/FSE_Compilers/CXSTM8/Hstm8",
+                "${workspaceFolder}/tools/COSMIC/FSE_Compilers/CXSTM8/Lib",
+                "${workspaceFolder}/tools/COSMIC/stsw-stm8069/STM8S_StdPeriph_Lib/Libraries/STM8S_StdPeriph_Driver/inc"
             ],
             "defines": [
                 "__CSMC__",
                 "STM8S103",
-                "__STDC__"
+                "__STDC__",
+                "@svlreg="
             ],
-            "compilerPath": "C:/Program Files (x86)/COSMIC/FSE_Compilers/CXSTM8/cxstm8.exe",
+            "forcedInclude": [
+                "${workspaceFolder}/mocks/iostm8s103.h"
+            ],
+            "intelliSenseMode": "windows-msvc-x86",
+            "cStandard": "c89",
             "browse": {
                 "path": [
-                    "${workspaceFolder}/include",
-                    "C:/Program Files (x86)/COSMIC/FSE_Compilers/CXSTM8"
+                    "${workspaceFolder}",
+                    "${workspaceFolder}/tools/COSMIC/FSE_Compilers/CXSTM8/Hstm8"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             }

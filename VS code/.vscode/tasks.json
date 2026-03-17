@@ -47,15 +47,15 @@
       "command": "cmd.exe",
       "args": [
         "/c",
-        "for %f in (src\\*.c) do \"C:\\Program Files (x86)\\COSMIC\\FSE_Compilers\\CXSTM8\\cxstm8.exe\" -i include src\\%~nxf"
+        "for %f in (src\\*.c) do \"${workspaceFolder}\\tools\\COSMIC\\FSE_Compilers\\CXSTM8\\cxstm8.exe\" -i include src\\%~nxf"
       ],
       "problemMatcher": [],
-        "options": {
+      "options": {
         "shell": {
-        "executable": "cmd.exe",
-        "args": ["/c"]
-      }
-    },
+          "executable": "cmd.exe",
+          "args": ["/c"]
+        }
+      },
       "group": "build"
     },
     {
@@ -64,13 +64,13 @@
       "command": "cmd.exe",
       "args": [
         "/c",
-        "for %f in (src\\*.c) do \"C:\\Program Files (x86)\\COSMIC\\FSE_Compilers\\CXSTM8\\cxstm8.exe\" +debug -i include src\\%~nxf"
+        "for %f in (src\\*.c) do \"${workspaceFolder}\\tools\\COSMIC\\FSE_Compilers\\CXSTM8\\cxstm8.exe\" +debug -i include src\\%~nxf"
       ],
       "problemMatcher": [],
       "options": {
-      "shell": {
-      "executable": "cmd.exe",
-      "args": ["/c"]
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/c"]
         }
       }
     },
@@ -94,11 +94,10 @@
         "cwd": "${workspaceFolder}"
       }
     },
-
     {
       "label": "Link STM8 with COSMIC",
       "type": "shell",
-      "command": "\"C:/Program Files (x86)/COSMIC/FSE_Compilers/CXSTM8/clnk.exe\"",
+      "command": "\"${workspaceFolder}/tools/COSMIC/FSE_Compilers/CXSTM8/clnk.exe\"",
       "args": [
         "-o", "Debug\\practice1.sm8",
         "src\\practice1.lkf"
@@ -119,7 +118,7 @@
       "label": "Convert SM8 to HEX",
       "dependsOn": ["Link STM8 with COSMIC"],
       "type": "shell",
-      "command": "\"C:/Program Files (x86)/COSMIC/FSE_Compilers/CXSTM8/chex.exe\"",
+      "command": "\"${workspaceFolder}/tools/COSMIC/FSE_Compilers/CXSTM8/chex.exe\"",
       "args": [
         "-fi",
         "-o",
@@ -140,7 +139,7 @@
       "label": "Flash STM8 via stm8flash",
       "dependsOn": ["Convert SM8 to HEX"],
       "type": "shell",
-      "command": "C:/Tools/stm32flash_win32-master/stm8flash.exe",
+      "command": "${workspaceFolder}/tools/stm32flash_win32-master/stm8flash.exe",
       "args": [
         "-c", "stlinkv2",
         "-p", "stm8s103f3",
@@ -159,11 +158,10 @@
         "cwd": "${workspaceFolder}"
       }
     },
-
     {
       "label": "Link STM8 with COSMIC (debug)",
       "type": "shell",
-      "command": "\"C:/Program Files (x86)/COSMIC/FSE_Compilers/CXSTM8/clnk.exe\"",
+      "command": "\"${workspaceFolder}/tools/COSMIC/FSE_Compilers/CXSTM8/clnk.exe\"",
       "args": [
         "-o", "Debug\\practice1.out",
         "-m", "Debug\\practice1.map",
@@ -183,7 +181,7 @@
     {
       "label": "Convert OUT to ELF",
       "type": "shell",
-      "command": "\"C:/Program Files (x86)/COSMIC/FSE_Compilers/CXSTM8/cvdwarf.exe\"",
+      "command": "\"${workspaceFolder}/tools/COSMIC/FSE_Compilers/CXSTM8/cvdwarf.exe\"",
       "args": [
         "-o", "Debug\\practice1.elf",
         "Debug\\practice1.out"
@@ -199,29 +197,31 @@
       }
     },
     {
-    "label": "Check Code (Cppcheck)",
-    "type": "shell",
-    "command": "C:/Tools/cppcheck.exe",
-    "args": [
-      "--enable=all",
-      "--std=c89",
-      "--inconclusive",
-      "--force",
-      "-I", "mocks",       // Сначала ищем тут (найдет наш фейк)
-      "-I", "include",     // Потом тут (найдет chrono.h и т.д.)
-      "src/"
-    ],
+      "label": "Check Code (Cppcheck)",
+      "type": "shell",
+      "command": "${workspaceFolder}/tools/CppCheck/cppcheck.exe",
+      "args": [
+        "--enable=all",
+        "--std=c89",
+        "--inconclusive",
+        "--force",
+        "--check-level=exhaustive",
+        "--suppress=missingIncludeSystem",
+        "-I", "mocks",
+        "-I", "include",
+        "src/"
+      ],
       "problemMatcher": {
-      "owner": "cppcheck",
-      "fileLocation": ["relative", "${workspaceFolder}"],
-      "pattern": {
-        "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error|style|performance|portability|information):\\s+(.*)$",
-        "file": 1,
-        "line": 2,
-        "column": 3,
-        "severity": 4,
-        "message": 5
-      }
+        "owner": "cppcheck",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error|style|performance|portability|information):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
       }
     }
   ]

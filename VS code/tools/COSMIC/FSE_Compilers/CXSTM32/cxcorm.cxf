@@ -1,0 +1,22 @@
+#	CONFIGURATION FILE FOR CORTEX-M COMPILER
+#	Copyright (c) 2011 by COSMIC Software
+#
+-pu				# unsigned char
+-i "C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\HCORM"
+-pm0x3030			# default model
+#
+-m debug:x			# debug: produce debug info
+-m proto:p			# proto: enable prototype checking
+-m nobss:,bss			# nobss: do not use bss
+-m sprec:f			# sprec: use float only
+-m fpu:frf,,,,mod0		# fpu: use float fpu (m4)
+-m dpu:fr,,,,mod0,fpu,sprec	# dpu: use double fpu (m7)
+-m rev:rb			# rev: reverse bit field order
+-m warn:w1			# warn: enable warnings
+-m strict:ck			# strict: enforce type checking
+-m split:,sf			# split: functions in different sections
+-m mods:hmods.h,,,,modsc,modl,modlc,mod0	# mods: 4K data, 64K constants
+-m modsc:hmodsc.h,cm,,,mods,modl,modlc,mod0	# modsc: 4K data, unlimited constants
+-m modl:hmodl.h,,,,mods,modsc,modlc,mod0	# modl: unlimited data, 64K constants
+-m modlc:hmodlc.h,cm,,,mods,modsc,modl,mod0	# modlc: unlimited data, unlimited constants
+-m mod0:rr,m0,,n0,mods,modsc,modl,modlc,fpu,dpu	# mod0: M0 target

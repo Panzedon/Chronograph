@@ -1,0 +1,7 @@
+clnk
+G,-s,Output Symbol Table Only,105
+G,-sl,Output Local Symbols,104
+G,-si,Suppress info Section,103
+G,-sa,Sort Symbols By Address in Map File,102
+G,-p,Display Physical Addresses in Map File,101
+G,-v,Verbose Mode,100

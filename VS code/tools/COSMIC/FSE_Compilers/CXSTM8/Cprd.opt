@@ -1,0 +1,5 @@
+cprd
+-ra,recurse structure always,100
+-r,recurse structure once,101
+-s,display object size,102
+-u,display unused object,103

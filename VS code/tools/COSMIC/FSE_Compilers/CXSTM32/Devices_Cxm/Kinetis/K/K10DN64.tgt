@@ -1,0 +1,171 @@
+[TARGET]
+Name=K10DN64
+[LINK]
+##	link command file for K10DN64
+##	Copyright (c) 2015 by COSMIC Software
+##
++seg .vector -b 0x0 -m 0x400 -n .vector			# vectors start address
+#if defined(__OPT_PSPLIT__)
+-k
+#endif
++seg .sconst -b 0x410 -m 0xfbf0 -n .sconst -r2		# short constants follow vectors
++seg .const -a .sconst -n .const			# large constants follow short constants
++seg .text -a .const -n .text				# program follow constants
++seg .sdata -b 0x20000000 -o0 -m 0x1000 -n .sdata -r2 -id # short data start address
++seg .sbss -a .sdata -n .sbss				# short bss follow short data
++seg .bss -a .sbss -o0 -m 0x2000 -n .bss		# large bss follow short bss
++seg .data -a .bss -n .data				# large data follow large bss
+
+## interrupt vectors
+#if defined(__STP_VECTOR__)
+__STP_VECTORFILE__
+#endif
+
+## startup file
+#if defined(__STP_CRTS__)
+"crts.cxm"
+#elif defined(__STP_CRTSI__)
+"crtsi.cxm"
+#endif
+
+## application files
+__STP_FILES__
+
+## libraries
+#if defined(__OPT_PMODS__)
+#if defined(__STP_FLOAT__)
+#if defined(__OPT_PFPU__)
+"libfpus.cxm"
+#elif defined(__OPT_PSPREC__)
+"libfs.cxm"
+#else
+"libds.cxm"
+#endif
+#endif
+"libilc.cxm"			# C library (if needed)
+#elif defined(__OPT_PMODSC__)
+#if defined(__STP_FLOAT__)
+#if defined(__OPT_PFPU__)
+"libfpusc.cxm"
+#elif defined(__OPT_PSPREC__)
+"libfsc.cxm"
+#else
+"libdsc.cxm"
+#endif
+#endif
+"libisc.cxm"			# C library (if needed)
+#elif defined(__OPT_PMODL__)
+#if defined(__STP_FLOAT__)
+#if defined(__OPT_PFPU__)
+"libfpul.cxm"
+#elif defined(__OPT_PSPREC__)
+"libfl.cxm"
+#else
+"libdl.cxm"
+#endif
+#endif
+"libil.cxm"			# C library (if needed)
+#else
+#if defined(__STP_FLOAT__)
+#if defined(__OPT_PFPU__)
+"libfpulc.cxm"
+#elif defined(__OPT_PSPREC__)
+"libflc.cxm"
+#else
+"libdlc.cxm"
+#endif
+#endif
+"libilc.cxm"			# C library (if needed)
+#endif
+"libm.cxm"			# machine library
+
+## symbols
++def __sram=pstart(.sbss)			# bss start address
++def __eram=pend(.bss)				# bss end address
++def __sdata=pstart(.sdata)			# start of based data
++def __stack=0x20002000				# stack pointer initial value
++def __memory=pend(.data)			# symbol used by library
+[VECTOR]
+/*	INTERRUPT VECTOR TABLE FOR K10DN64
+ *	Copyright (c) 2015 by COSMIC Software
+ */
+extern void _stext(void);	/* startup code */
+extern int _stack;		/* stack address */
+
+/*	dummy interrupt function
+ */
+@interrupt void _dummit(void)
+	{
+	}
+
+#pragma section const {vector}
+
+/*	vector table
+ */
+void (* const _vectab[62])(void) = {
+/* 0 */		(void *)&_stack,	/* Initial Stack Pointer */
+/* 1 */		_stext,			/* Initial Program Counter */
+/* 2 */		_dummit,		/* Non-maskable Interrupt (NMI) */
+/* 3 */		_dummit,		/* Hard Fault */
+/* 4 */		_dummit,		/* MemManage Fault */
+/* 5 */		_dummit,		/* Bus Fault */
+/* 6 */		_dummit,		/* Usage fault */
+/* 7 */		_dummit,		/* reserved */
+/* 8 */		_dummit,		/* reserved */
+/* 9 */		_dummit,		/* reserved */
+/* 10 */	_dummit,		/* reserved */
+/* 11 */	_dummit,		/* Supervisor Call (SVCall) */
+/* 12 */	_dummit,		/* Debug Monitor */
+/* 13 */	_dummit,		/* reserved */
+/* 14 */	_dummit,		/* Pendable Service Request */
+/* 15 */	_dummit,		/* System Tick Timer */
+
+/* 16 */	_dummit,		/* DMA channel 0 transfer complete */
+/* 17 */	_dummit,		/* DMA channel 1 transfer complete */
+/* 18 */	_dummit,		/* DMA channel 2 transfer complete */
+/* 19 */	_dummit,		/* DMA channel 3 transfer complete */ 
+/* 20 */	_dummit,		/* DMA error channel 0-3 */
+/* 21 */	_dummit,		/* reserved */
+/* 22 */	_dummit,		/* FLASH command complete */
+/* 23 */	_dummit,		/* FLASH read collision */
+/* 24 */	_dummit,		/* Low voltage detect */
+/* 25 */	_dummit,		/* LLWU */
+/* 26 */	_dummit,		/* Watchdog */
+/* 27 */	_dummit,		/* I2C0 */
+/* 28 */	_dummit,		/* SPI0 */
+/* 29 */	_dummit,		/* I2S0 transmit */
+/* 30 */	_dummit,		/* I2S0 receive */
+/* 31 */	_dummit,		/* UART0 LON */
+/* 32 */	_dummit,		/* UART0 status */
+/* 33 */	_dummit,		/* UART0 error */
+/* 34 */	_dummit,		/* UART1 status */
+/* 35 */	_dummit,		/* UART1 error */
+/* 36 */	_dummit,		/* UART2 status */
+/* 37 */	_dummit,		/* UART2 error */
+/* 38 */	_dummit,		/* ADC0 */
+/* 39 */	_dummit,		/* CMP0 */
+/* 40 */	_dummit,		/* CMP1 */
+/* 41 */	_dummit,		/* FTM0 */
+/* 42 */	_dummit,		/* FTM1 */
+/* 43 */	_dummit,		/* CMT */
+/* 44 */	_dummit,		/* RTC alarm */
+/* 45 */	_dummit,		/* RTC seconds */
+/* 46 */	_dummit,		/* PIT channel 0 */
+/* 47 */	_dummit,		/* PIT channel 1 */
+/* 48 */	_dummit,		/* PIT channel 2 */
+/* 49 */	_dummit,		/* PIT channel 3 */
+/* 50 */	_dummit,		/* PDB */
+/* 51 */	_dummit,		/* reserved */
+/* 52 */	_dummit,		/* reserved */
+/* 53 */	_dummit,		/* TSI */
+/* 54 */	_dummit,		/* MCG */
+/* 55 */	_dummit,		/* Low Power Timer */
+/* 56 */	_dummit,		/* Port A Pin Detect */
+/* 57 */	_dummit,		/* Port B Pin Detect */
+/* 58 */	_dummit,		/* Port C Pin Detect */
+/* 59 */	_dummit,		/* Port D Pin Detect */
+/* 60 */	_dummit,		/* Port E Pin Detect */
+/* 61 */	_dummit,		/* Software Interrupt */
+	};
+[OPTION]
++modlc

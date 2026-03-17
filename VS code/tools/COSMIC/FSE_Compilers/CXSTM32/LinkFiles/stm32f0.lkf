@@ -1,0 +1,20 @@
+#	Link command file for STM32F0 family
+#	Copyright (c) 2012 by COSMIC Software
+#
++seg .vector -b 0x8000000 -m 0x10000 -r2 -n vector	# interrupt tables
++seg .const -a vector -n const			# constants
++seg .text -a const -it -n text			# program follow constants
++seg .data -b 0x20000000 -m 0x2000 -r2 -n data	# large data
++seg .bss -a data -n bss			# uninitialized small data
+vector.o					# interrupt vectors
+/usr/lib/crts.cx0				# startup file
+
+# enter object files here
+
+/usr/lib/libi.cx0				# integer libraries mods
+/usr/lib/libm.cx0
+
++def __sram=start(bss)				# bss start address
++def __eram=end(bss)				# bss end address
++def __stack=0x20002000				# stack pointer initial value
++def __memory=end(bss)				# symbol used by library

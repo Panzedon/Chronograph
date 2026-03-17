@@ -2,16 +2,29 @@
 #define EEPROM_H
 #include <stdint.h>
 
-/* Адрес в EEPROM для хранения режима (0=m/s, 1=J, 2=FPS) */
+/**
+ * @brief Адреса в пам'яті EEPROM для збереження режиму (Швидкість, Енергія, Скорострільність)
+ */
 #define EEPROM_ADDR_MODE  0x4000
 
-/* Адрес в EEPROM для хранения индекса веса (0..4) */
+/**
+ * @brief Адреса в пам'яті EEPROM для збереження індексу ваги кульки
+ */
 #define EEPROM_ADDR_WEIGHT 0x4001
 
-/* Чтение байта */
+/**
+ * @brief Читає один байт даних за вказаною адресою
+ * @param addr Фізична адреса в просторі EEPROM STM8
+ * @return Прочитаний байт
+ */
 uint8_t EEPROM_Read(uint16_t addr);
 
-/* Запись байта (с разблокировкой) */
+/**
+ * @brief Записує один байт даних в EEPROM
+ * @param addr Фізична адреса в просторі EEPROM STM8
+ * @param data Байт даних для збереження
+ * @note Функція автоматично розблоковує пам'ять (Data Unlock) і чекає завершення запису
+ */
 void EEPROM_Write(uint16_t addr, uint8_t data);
 
 #endif

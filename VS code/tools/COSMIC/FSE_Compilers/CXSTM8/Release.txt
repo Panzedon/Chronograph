@@ -1,0 +1,552 @@
+		-------------------------------
+		Release Notes for STM8 Compiler
+		-------------------------------
+
+V4.6.5:
+------
+	. The MISRA rule 3.1 has been enhanced to allow URI links in comments.
+
+	. The linker was crashing when using MISRA and when using a -k segment
+	  option in the linker command file.
+
+	. The parser was crashing when using MISRA and checking missing parentheses
+	  on a single token macro argument.
+
+V4.6.4:
+------
+	. The compiler has been updated for licence manager evolution.
+
+V4.6.3:
+------
+	. The optimizer was creating an invalid compare instruction for a complex 16 bits
+	  compare operation.
+
+	. The compiler was producing a wrong code when casting to type _Bool the result of
+	  an operation between a 16 bits variable and a 32 bits constant.
+
+V4.6.2:
+------
+	. The compiler was failing to produce code using two void inline function calls
+	  on both sides of a conditional operator.
+
+	. The compiler was not accepting the initialization of a sub structure in a local
+	  structure variable using a C99 designator with a structure assignment. 
+
+V4.6.1:
+------
+	. The compiler implements a MISRA checker enabled by using option +misra
+	  and controlled by new preprocessor directive #pragma misra. A separate
+	  manual describes the settings and the rules behaviour.
+
+V4.5.6:
+------
+	. The compiler is producing a wrong code when returning from a function with
+	  local variables from a test calling a function with stacked arguments.
+	  This problem has been introduced in version V4.5.5.
+
+V4.5.5:
+------
+	. The compiler has been enhanced for access to local variables and stack
+	  frame cleanup of functions using more than 256 bytes of local space.
+
+	. The code generator was crashing when compiling an increment of an eeprom
+	  array element using a non constant index. 
+
+	. The optimizer was wrongly removing the load instruction of a stack
+	  variable when preceded by a store/move/clear instruction using the
+	  same offset, regardless of the index register used.
+
+V4.5.4:
+------
+	. The compiler fails to cast directly a structure bitfield to a far pointer,
+	  producing a PANIC error message.
+
+	. The parser was hanging when optimizing the result of a right shift
+	  operation anded with a negative constant.
+
+V4.5.3:
+------
+	. The parser was not handling properly a macro expansion with arguments split
+	  on several lines using preprocessor conditional directives
+
+V4.5.2:
+------
+	. The parser was crashing when optimizing an expression containing a right
+	  shift of a volatile object anded with a constant. The problem has been
+	  introduced in the V4.5.1 version.
+
+V4.5.1:
+------
+	. The compiler has been enhanced to produce more efficient code when using
+	  the +fast option. More 32 bit operations are inlined producing a faster
+	  but larger code.
+
+	. The compiler produces a wrong conditional jump instruction when testing
+	  against zero a signed integer variable assigned from a function call in
+	  the same expression.
+
+	. The compiler is producing a wrong code when the body of a while loop
+	  contains a continue statement, and when the body ends with the increment
+	  or decrement of the variable tested in the while expression.
+
+V4.4.12:
+-------
+	. The optimizer was producing a wrong code when accessing the first
+	  char element of a structure accessed by pointer immediatly after an
+	  indexed access to an array member of the same structure.
+
+	. The parser was producing a wrong error message when optimizing a
+	  conditional operator producing two non zero constants in the test
+	  expression of an if statement.
+
+V4.4.11:
+-------
+	. The printf format has been extended to accept the 'b' modifier in
+	  interger formats to handle a byte argument. As the compiler does not
+	  widen char arguments for keeping efficiency, this modifier avoids
+	  an explicit cast to type int by using %bd instead of %d.
+
+	. The parser implements a new option -ni to suppress automatic recursion
+	  when specifying an include directory with -i option.
+
+	. The compiler was producing a wrong code when calling a function
+	  build inside a local array and called with at least two arguments.
+
+V4.4.10:
+-------
+	. The compiler was producing a wrong result when dividing the result of
+	  a 16x8 multiplication by the result of any other expression with at least
+	  one operator. This problem was introduced in the V4.4.8 release.
+
+V4.4.9:
+------
+	. The compiler was not saving the c_x area when the 16x8 multiplication
+	  routine introduced in the V4.4.8 release was used from an interrupt
+	  function.
+
+	. An efficiency regression has been fixed as the 16x8 multiplication
+	  routine was called in some situations where an 8x8 instruction was
+	  possible.
+
+V4.4.8:
+------
+	. The compiler is implementing a more efficient code when multiplying
+	  an unsigned int by an unsigned char or a small constant.
+
+V4.4.7:
+------
+	. The optimizer was wrongly removing the second occurence of two
+	  identical array indexing using a 16 bit integer anded with a byte
+	  constant, when the 16 bit integer was modified between the two
+	  occurences.
+
+	. The optimizer was producing an erroneous instruction when removing a
+	  useless stack frame setting for a function clearing a local variable
+	  and only testing it after.
+
+	. The optimizer was wrongly replacing an inlined "pop cc" instruction when
+	  produced at the end of a function using local variables. 
+
+V4.4.6:
+------
+	. The compiler was producing a wrong code when incrementing a long
+	  variable located in an @eeprom array using a non constant index.
+
+	. The compiler was wrongly modifying the high byte of a far pointer
+	  passed as the first argument of a function, and used in the first
+	  instruction of a switch statement case located at the beginning
+	  of the function.
+
+V4.4.5:
+------
+	. The linker has been enhanced to detect interrupt functions missing
+	  the @svlreg modifier.
+
+	. The optimizer has been enhanced to avoid building a useless stack
+	  frame when access to local variables has been optimized out.
+
+	. The compiler produces a wrong code for a function with a char as
+	  first argument, accessed immediatly after a 32 bit modifying
+	  operation occuring at the very beginning of the function.
+
+	. The compiler produces a wrong code for a function with a far pointer
+	  as first argument, compared twice to constants at the very beginning
+	  of the function. The code for the second compare is wrong.
+
+V4.4.4:
+------
+	. The compiler was producing a wrong code when inverting a _Bool
+	  local variable when it was the only _Bool variable of the function.
+
+V4.4.3:
+------
+	. The compiler was producing a wrong code when testing the first char
+	  argument of a function after a first test not breaking the A register.
+
+	. The compiler produces a wrong code when activating the +compact
+	  option. This problem only affects version V4.4.2.
+
+V4.4.2:
+------
+	. The optimizer was producing a wrong instruction resulting in an
+	  assembler error message when handling crossed index register loads
+	  of the same pointer, when the same pointer was use at least twice
+	  to access the first byte of a structure.
+
+	. The compiler was not getting the correct stack address when
+	  subtracting two char pointers cast each to integer type, when one
+	  of the pointers was the address of a local variable, and when the
+	  result was assigned to a char variable.
+
+	. The compiler was failing to call a function whose first argument
+	  was a 16 bits subtract with one operand accessing an indexed pointer
+	  or array computing a multiplication.
+
+V4.4.1:
+------
+	. The compiler support C99 initialization syntax using designators
+	  and compound literals.
+
+	. The debug information has been enhanced to allow a better tracking
+	  of variables between registers and memory.
+
+	. The optimizer was wrongly removing a memory load after an _asm
+	  instruction producing a bset or bclr instruction on the same memory
+	  location just after an assignment to the same memory location.
+
+	. The compiler was producing a wrong code when subtracting the int
+	  value returned by a function call to an int variable.
+
+V4.3.13:
+-------
+	. The optimizer was wrongly removing a word memory load when preceded
+	  by a bset/bres modifying the lower byte of the memory word.
+
+V4.3.12:
+-------
+	. The compiler implements new checksum library functions using the
+	  standard CCITT-16 algorithm.
+
+	. The code generator was producing a wrong code when accessing the
+	  first int argument of a function when it has been first used as
+	  right operand of a |=, &= or ^= with memory as the first instruction
+	  of the function.
+
+V4.3.11:
+-------
+	. The parser was wrongly moving the assignment of a local array
+	  element outside a loop when the loop body was containing a function
+	  call passing the array name as argument.
+
+	. The compiler was producing a wrong #line directive when preprocessing
+	  only a file containing continuation characters on lines not belonging
+	  to any preprocessor directives
+
+	. The optimizer was wrongly moving a load of the long accumulator
+	  c_lreg before a previous label even if the long accumulator was
+	  modified by a machine library call.
+
+V4.3.10:
+-------
+	. The compiler was producing wrong source file names in the debug
+	  information when a file was first preprocessed and then compiled
+	  with debug.
+
+	. The compiler was producing a wrong code when calling a fonction by
+	  a pointer which was assigned to a constant at the end of the same
+	  function.
+
+	. The optimizer was modifying bit and mov instructions even when
+	  accessing volatile memory locations.
+
+V4.3.9:
+------
+	. The compiler has been enhanced to produce a more efficient code for
+	  8 bit division and modulus.
+
+V4.3.8:
+------
+	. The optimizer has been enhanced for a better compacting of bset and
+	  bres instructions.
+
+	. The optimizer was wrongly removing an address register load when
+	  copying twice the same structure.
+
+	. The optimizer was wrongly moving the last load from an indexed local
+	  array after the stack update instruction allowing a wrong result if
+	  an interrupt was occuring just between the two instructions.
+
+V4.3.7:
+------
+	. The compiler produces eclipse compatible error messages when called
+	  with the -eg option.
+
+	. The linker supports a -q option for a manual segment initialization.
+
+	. The optimizer was wrongly compressing a call to a switch machine
+	  library routine immediatly followed by a return when using the
+	  +compact option.
+
+	. The code generator was wrongly using bset/bres instructions to handle
+	  bitfields accessed by a pointer.
+
+	. The code generator was not saving the c_lreg area when an interrupt
+	  function uses a 16 x 16 -> 32 multiplication as the only 32 bits
+	  operations in the whole function.
+
+	. The code generator was producing a wrong code for a right shift on
+	  unsigned integers with a constant shift count, when the result is
+	  produced in the Y index register.
+
+	. The code generator was failing to produce code when multiplying two 8
+	  bit objects assigned to a local variable which is not used any more.
+
+	. The compiler was keeping the two first char arguments in register
+	  when calling a function with variable argument list, where all
+	  arguments but the first one are expected to be stacked.
+
+V4.3.6:
+------
+	. The compiler supports the division silicon bug and implements the
+	  new @noprd modifier and code generator -dp option.
+
+	. The optimizer was wrongly compressing a call to a switch machine
+	  library routine immediatly followed by a return when using the
+	  +compact option.
+
+	. The code generator was crashing when trying to increment an element
+	  of an indexed @eeprom array.
+
+	. The optimizer was replacing two consecutive indirect accesses by
+	  indexed ones even if the pointer in memory was modified in between.
+
+V4.3.5:
+------
+	. The optimizer was wrongly removing a compare instruction to zero
+	  after a load, when a memory operation was between the load and
+	  the compare, and when the conditional branch were not using
+	  the zero flag.
+
+	. The comparison of a long against zero with a magnitude operator was
+	  sometimes producing a wrong result because the overflow flag was
+	  not always cleared properly in the code or in the library routine.
+
+	. The code generator has been enhanced to support 32 bits bitfields.
+
+V4.3.4:
+------
+	. The compiler was not saving properly the c_x area when used by an
+	  interrupt function in a char comparison to an int.
+
+	. The code generator was not inlining any more the memcpy function
+	  when called with a constant count argument.
+
+	. The compiler was not folding properly constants in a construct using
+	  a conditional operator followed by a left shift operator.
+
+V4.3.3:
+------
+	. The compiler produces a wrong return sequence for a function
+	  returning type _Bool with exactly one byte as local variable.
+
+	. The compiler was producing a wrong code when using a first char
+	  argument in an int shift operation as a shift count, immediatly
+	  followed by any operation using the very same argument.
+
+V4.3.2:
+------
+	. The compiler implements a +fast option allowing some 32 bits
+	  operations such as transfers and compares to be inlined.
+	  The code is larger but faster.
+
+	. The compiler was producing a wrong addressing mode when setting or
+	  clearing a one bit bitfield accessed from a static pointer.
+
+	. The compiler was producing a wrong code when accessing a structure
+	  element from a pointer passed as the first argument of a function,
+	  immediatly after the increment of an int field of the same structure
+	  found as the first instruction of the function.
+
+V4.3.1:
+------
+	. The compiler produces a .info. section containing the list of all
+	  parameters for all passes of all files. This special section can be
+	  suppressed by compiling with option -asi.
+
+	. The compiler was producing a wrong code when accessing the first
+	  argument of a function immediatly after a compare where this first
+	  argument is used as operand on the right side of the compare operator.
+
+	. The compiler was producing a wrong code when testing the result of a
+	  conditional operator producing a zero constant in the true case, and
+	  a non zero constant in the false case. This problem has been
+	  introduced by the previous version.
+
+V4.2.10:
+-------
+	. The compiler was producing a wrong code when testing a signed byte
+	  returned by a function smaller or equal to zero.
+
+	. The optimizer was wrongly removing an 8 bit test instruction testing
+	  the upper byte of a 16 bit word stored before at the same address.
+
+	. The optimizer was wrongly splitting a mov instruction followed by a
+	  load word from the same address, producing an assembler error.
+
+	. The optimizer was wrongly changing a load of constant one into an
+	  index register by an increment after a conditional branch if the
+	  instruction setting the zero flag was modifying directly the memory
+	  with an indexed addressing mode using the same index register.
+
+V4.2.9:
+------
+	. The compiler implements more efficiently the eeprom programming
+	  routines associated to @eeprom variables.
+
+	. The checksum routines do not need any more the extra symbol
+	  __ckdend__ at the end of the descriptor.
+
+	. The compiler was producing a wrong code when testing a long with an
+	  and operator with a constant with bits set on more than one byte.
+
+	. The compiler was not setting the X register properly when passing
+	  an @tiny structure larger than 4 bytes as argument to a function.
+
+	. The optimizer was wrongly removing a clrw register instruction when
+	  oring a right shifted char variable with an integer constant.
+
+	. The optimizer was wrongly removing a test instruction if a byte was
+	  already loaded in a register and modified by a mov instruction
+	  in between.
+
+	. The code generator was using the first int argument from register
+	  while it was modified by an addition into a global variable.
+
+V4.2.8:
+------
+	. The compiler was not inlining properly the memcpy function when
+	  called with a count argument of zero.
+
+	. An interrupt function declared with @nosvf, but calling a far
+	  function by pointer thus using the c_x area was saving only 2
+	  bytes instead of 3.
+
+	. The code generator was producing a wrong code when calling a function
+	  with at least two long arguments both accessed from the same pointer,
+	  when this pointer is the first argument of the containing function,
+	  and the call the first instruction of that function.
+
+	. The compiler was not setting properly a global long integer
+	  initialized with a cast address of a far object.
+
+V4.2.7:
+------
+	. The pipeline optimization was wrongly exchanging instructions
+	  with specific ones like 'wfi'.
+
+	. The code generator was producing a wrong code when multiplying
+	  two char variables both accessed by a pointer.
+
+	. The code generator was not inlining properly the memcpy function
+	  when an operand was an @tiny array.
+
+	. The code generator was failing to pass a tiny pointer as first
+	  argument to a function.
+
+	. The compiler was producing a wrong code when subtracting a value
+	  from a far pointer.
+
+V4.2.6:
+------
+	. The optimizer was failing to reorder propoerly the pipeline when
+	  the +compact option was specified
+
+	. Interrupt functions calling machine library routines using the
+	  c_x or c_y areas were not saving those locations.
+
+V4.2.5:
+------
+	. The optimizer is reordering instructions for a better pipeline
+	  efficiency.
+
+	. Interrupt functions can be located anywhere.
+
+	. The compiler was not ending properly functions returning _Bool
+	  expressions.
+
+	. The cvdwarf converter has been completed with accurate register
+	  coding for argument passing.
+
+V4.2.4:
+------
+	. The compiler is using relative jump tables in the code itself when
+	  using a large model allowing a function using a switch to be located
+	  across a 64K sector boundary.
+
+	. The compiler provides new startup routines allowing the init table
+	  to be located outside the first 64K sector.
+
+	. The code generator produces a better code when toggling _Bool or
+	  one bit bitfield variables.
+
+	. The optimizer has been enhanced to produce a better code when
+	  accessing arrays with a computed index.
+
+V4.2.3:
+------
+	. The compiler has been enhanced to produce a better code when
+	  computing several consecutive local object addresses.
+
+	. The compiler was building a wrong addressing mode when using a
+	  negative offset on a pointer.
+
+	. The code generator was reverting arguments when implementing a
+	  structure assignment with both structures accessed by pointer.
+
+	. The optimizer was wrongly clearing a memory location when preceded
+	  by a clear of the X register.
+
+V4.2.2:
+------
+	. The compiler was producing a wrong instruction when setting a one
+	  bit bitfield with a pointer.
+
+	. The code generator was not saving the A register when using a 32
+	  bit subtract followed by a shift.
+
+	. The switch statement on a long expression was failing with models
+	  smaller than 64K 
+
+	. The optimizer was not updating an integer loop index in memory when
+	  its value was read as a byte inside the loop.
+
+V4.2.1:
+------
+	. The compiler was not properly sign extending the 8 bit result
+	  of a modulo operation between an int and a signed char.
+
+	. The compiler was wrongly propagating a negative offset on a 16
+	  bits address thus allowing a wrong location to be accessed as the
+	  processor produces a 17 bits offset.
+
+	. The optimizer was wrongly removing a load from the long accumulator
+	  when using the +compact option and when the accumulator was set only
+	  by calls to machine library routines.
+
+V4.1.3:
+------
+	. The compiler was not accessing properly @far bitfields
+	. The _Bool variables can be located anywhere in the sector 0
+	. The @vector modifier is implemented for interrupt vectors
+
+V4.1.2:
+------
+	. The compiler implements the extra instruction of the V2 core
+
+V4.1.1:
+------
+	. The standard test suites have been passed
+
+V4.1.0:
+------
+	. The optimizer is implemented

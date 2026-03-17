@@ -1,0 +1,17 @@
+---------------------------------
+STM32 COSMIC C 32K Compiler
+Version: 4.3.12 Date: 14 Dec 2023
+---------------------------------
+COSMIC Software CORTEX-M C Cross Compiler (LIMITED) V4.3.12 - 14 Dec 2023 - Win32-F
+COSMIC Software CORTEX-M C Parser (LIMITED) V4.13.7 - 08 Nov 2023 - Win32-F
+COSMIC Software CORTEX-M Code Generator (LIMITED) V4.3.12 - 14 Dec 2023 - Win32-F
+COSMIC Software CORTEX-M Optimizer V4.2.12 - 14 Dec 2023 - Win32
+COSMIC Software CORTEX-M Macro-Assembler (LIMITED) V4.8.1 - 14 Dec 2023 - Win32-F
+COSMIC Software Linker (LIMITED) V4.12.1 - 02 Feb 2023 - Win32-F
+COSMIC Software Hexa Translator V4.5.7 - 06 Sep 2023 - Win32
+COSMIC Software Absolute Listing V4.5.7 - 06 Sep 2023 - Win32
+COSMIC Software Librarian V4.5.7 - 06 Sep 2023 - Win32
+COSMIC Software Absolute C Listing V4.5.7 - 06 Sep 2023 - Win32
+COSMIC Software Object Inspector V4.5.7 - 06 Sep 2023 - Win32
+COSMIC Software Print Debug Info V4.5.7 - 06 Sep 2023 - Win32
+COSMIC Software ELF/DWARF Converter V4.7.6 - 11 Jan 2022 - Win32

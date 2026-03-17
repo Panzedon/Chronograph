@@ -1,0 +1,17 @@
+--------------------------------------
+COSMIC STM8 C Compiler Special Edition
+Version: 4.6.5 Date: 22 May 2025
+--------------------------------------
+COSMIC Software STM8 C Cross Compiler (Special Edition) V4.6.5 - 22 May 2025 - Win32-F
+COSMIC Software STM8 C Parser (Special Edition) V4.13.3 - 22 May 2025 - Win32-F
+COSMIC Software STM8 Code Generator (Special Edition) V4.6.5 - 22 May 2025 - Win32-F
+COSMIC Software STM8 Optimizer V4.6.5 - 22 May 2025 - Win32
+COSMIC Software STM8 Macro-Assembler (Special Edition) V4.8.1 - 14 Dec 2023 - Win32-F
+COSMIC Software Linker (Special Edition) V4.12.2 - 05 May 2025 - Win32-F
+COSMIC Software Hexa Translator V4.5.8 - 27 Jun 2024 - Win32
+COSMIC Software Absolute Listing V4.5.8 - 27 Jun 2024 - Win32
+COSMIC Software Librarian V4.5.8 - 27 Jun 2024 - Win32
+COSMIC Software Absolute C Listing V4.5.8 - 27 Jun 2024 - Win32
+COSMIC Software Object Inspector V4.5.8 - 27 Jun 2024 - Win32
+COSMIC Software Print Debug Info V4.5.8 - 27 Jun 2024 - Win32
+COSMIC Software ELF/DWARF Converter V4.7.6 - 11 Jan 2022 - Win32

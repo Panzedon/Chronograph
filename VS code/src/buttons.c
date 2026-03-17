@@ -1,4 +1,3 @@
-
 #include "buttons.h"
 
 #define BTN1_PIN (1 << 1) /* PA1 */
@@ -7,15 +6,21 @@
 #define DEBOUNCE_TIME_MS 30
 #define LONG_PRESS_TIME_MS 1000
 
-/* Используем стандартные типы C, чтобы не зависеть от других файлов */
+/* Використовуємо стандартні типи C, щоб не залежати від інших файлів */
 typedef struct {
-    unsigned int  counter;    /* Счетчик миллисекунд удержания */
-    unsigned char state;      /* 0 = отпущена, 1 = нажата, 2 = удержание */
-    btn_event_t   event;      /* Готовое событие для передачи в main */
+    unsigned int  counter;    /* Лічильник мілісекунд утримання */
+    unsigned char state;      /* 0 = відпущена, 1 = натиснута, 2 = утримання */
+    btn_event_t   event;      /* Готова подія для передачі в main */
 } button_state_t;
 
 static button_state_t btns[2];
 
+/**
+ * @brief Ініціалізація портів вводу/виводу для кнопок та таймера антибрязкоту.
+ * @details Налаштовує піни PA1 та PA2 на вхід (без підтяжки/переривань).
+ * Скидає стан внутрішніх структур кнопок. Налаштовує TIM4 для 
+ * генерації переривань або встановлення прапорців кожну мілісекунду.
+ */
 void Buttons_Init(void) {
     PA_DDR &= ~(BTN1_PIN | BTN2_PIN);
     PA_CR1 &= ~(BTN1_PIN | BTN2_PIN);
@@ -27,17 +32,24 @@ void Buttons_Init(void) {
     TIM4_PSCR = 0x07; 
     TIM4_ARR  = 124;  
     
-    //TIM4_IER |= 0x01; 
+    /* TIM4_IER |= 0x01; */
     TIM4_CR1 |= 0x01; 
 }
 
+/**
+ * @brief Кінцевий автомат (стейт-машина) обробки фізичного стану кнопок.
+ * @details Зчитує фізичний стан пінів кнопок. Фільтрує брязкіт контактів 
+ * (затримка DEBOUNCE_TIME_MS). Відстежує час утримання кнопки для генерації 
+ * подій короткого (EVENT_SHORT_PRESS) або довгого (EVENT_LONG_PRESS) натискання.
+ * Повинна викликатися рівно раз на 1 мс.
+ */
 void Buttons_Tick(void) {
-    /* СТРОГИЙ C89: Все переменные объявляются в самом начале */
+    /* СУВОРИЙ C89: Всі змінні оголошуються на самому початку */
     unsigned char i;
     unsigned char pins_state;
     unsigned char is_pressed[2];
 
-    pins_state = PA_IDR; /* Читаем весь порт A один раз */
+    pins_state = PA_IDR; /* Читаємо весь порт A один раз */
 
     is_pressed[0] = (pins_state & BTN1_PIN);
     is_pressed[1] = (pins_state & BTN2_PIN);
@@ -68,8 +80,15 @@ void Buttons_Tick(void) {
     }
 }
 
+/**
+ * @brief Повертає зареєстровану подію для вказаної кнопки та скидає її.
+ * @details Безпечно (з відключенням переривань) читає подію з буфера кнопки.
+ * Після читання подія обнуляється, щоб уникнути повторного спрацьовування.
+ * @param btn_id Ідентифікатор кнопки (BTN_1_LASER або BTN_2_MENU).
+ * @return btn_event_t Тип події (EVENT_NONE, EVENT_SHORT_PRESS, EVENT_LONG_PRESS).
+ */
 btn_event_t Buttons_GetEvent(button_id_t btn_id) {
-    /* СТРОГИЙ C89: Переменная в начале */
+    /* СУВОРИЙ C89: Змінна на початку */
     btn_event_t current_event;
     
     _asm("sim"); 

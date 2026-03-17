@@ -1,11 +1,21 @@
-typedef void @far (*interrupt_handler_t)(void);
+#ifdef __INTELLISENSE__
+    #define INTERRUPT_
+    #define FAR_
+
+#endif
+
+#ifndef __INTELLISENSE__
+    #define INTERRUPT_ @interrupt
+    #define FAR_       @far
+#endif
+typedef void FAR_ (*interrupt_handler_t)(void);
 
 struct interrupt_vector {
     unsigned char interrupt_instruction;
     interrupt_handler_t interrupt_handler;
 };
 
-@far @interrupt void NonHandledInterrupt (void)
+static FAR_ INTERRUPT_ void NonHandledInterrupt (void)
 {
     return;
 }
@@ -13,9 +23,9 @@ struct interrupt_vector {
 extern void _stext();     /* startup routine */
 
 /* Подключаем наш обработчик оптики из chrono.c */
-extern @far @interrupt void Chrono_HandleInterrupt(void);
+extern FAR_ INTERRUPT_ void Chrono_HandleInterrupt(void);
 
-extern @far @interrupt void Chrono_OverflowInterrupt(void);
+extern FAR_ INTERRUPT_ void Chrono_OverflowInterrupt(void);
 
 struct interrupt_vector const _vectab[] = {
     {0x82, (interrupt_handler_t)_stext}, /* reset */

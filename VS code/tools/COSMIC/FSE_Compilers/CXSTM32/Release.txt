@@ -1,0 +1,160 @@
+		-----------------------------------
+		Release Notes for CORTEX-M Compiler
+		-----------------------------------
+
+V4.3.12:
+-------
+	. The optimizer was wrongly removing an extension instruction
+	  produced in a conditional sequence.
+
+	. The parser was producing a wrong error message when optimizing a
+	  conditional operator producing two non zero constants in the test
+	  expression of an if statement.
+
+	. The optimizer was producing a wrong instruction when multiplying
+	  a function argument by itself at the beginning of a function.
+
+	. The compiler was producing a wrong code when casting to a short or char
+	  type the result of a shift operator applied to a long long variable
+	  with a constant count equal or larger than 16.
+
+V4.3.11:
+-------
+	. The optimizer was wrongly removing a store instruction when storing
+	  a value into a local array with a computed index reused after with
+	  a non computed index.
+
+	. The compiler was not handling properly registers allocated for
+	  common subexpressions elimination in some complex cases.
+
+V4.3.10:
+-------
+	. The compiler was not accessing properly a _Bool field of a structure
+	  when the full structure was passed as argument to a function.
+
+	. The optimizer was producing a wrong code when implementing two
+	  combined if/else statements containing single assignments, allowing
+	  the first test to be implemented by an 'it' instruction, when the
+	  second else part was containing the same assignment than one of the
+	  first if/else branch.
+
+	. The compiler was producing a wrong code when an if/else construct was
+	  implemented by an 'it' instruction, and when the first assignment was
+	  modifying memory with a pointer indirection.
+
+	. The optimizer was producing a wrong code when left shifting a
+	  complemented variable and oring the result to another variable.
+
+V4.3.9:
+------
+	. The compiler was not initializing properly fields of a structure
+	  declared as a local variable when using the C99 prefixed initializer
+	  with a non constant expression.
+
+	. The compiler was no handling properly a volatile argument of an
+	  inline function when called with a constant value.
+
+	. The compiler was wrongly sharing induced variables from inline
+	  functions usage when created in blocks from different pathes.
+
+V4.3.8:
+------
+	. The compiler was not handling properly the _Pragma C99 directive
+	  when produced by a preprocessor macro.
+
+	. The code generator was failing to produce code for a switch statement
+	  with a constant label larger than 65535.
+
+	. The code generator was failing to call a function by pointer with
+	  at least 4 arguments.
+
+	. The optimizer was producing illegal cbz/cbnz instructions when
+	  preceded by mov instructions using registers in the second half.
+
+V4.3.7:
+------
+	. The compiler supports m7 processors with double precision fpu.
+
+V4.3.6:
+------
+	. The compiler support C99 initialization syntax using designators
+	  and compound literals.
+
+	. The compiler was failing to produce code when the same subexpression
+	  was found in the test part and a branch of a conditional operator.
+
+V4.3.5:
+------
+	. The optimizer was wrongly changing a moved register in a push list
+	  thus changing the memory display.
+
+	. the optimizer was wrongly removing a zero extension instruction
+	  after a double register load instruction.
+
+V4.3.4:
+------
+	. The compiler supports the _Bool type.
+
+	. The optimizer was wrongly removing a float register load when the
+	  same location was loaded previously into an interger register for
+	  zero testing (FPU only)
+
+V4.3.3:
+------
+	. The assembler and linker implement weak symbols with assembler
+	  directive wdef.
+
+	. The code generator was producing a wrong code when comparing an
+	  integer to a negative constant.
+
+	. The optimizer has been enhanced to remove useless extension
+	  instructions at loop bottom when incrementing or decrementing
+	  short or char counters.
+
+V4.3.2:
+------
+	. The compiler implements support for FPU with option +fpu
+
+	. The 32 bit float machine library has been enhanced for a better
+	  rounding support in basic operations.
+
+	. The negative long long constants were not loaded correctly in
+	  registers.
+
+	. The long long shift operations were not getting the count from
+	  the expected register when using a computed shift count.
+
+V4.3.1:
+------
+	. The compiler implements support for long long type and signed
+	  bitfields.
+
+V4.2.1:
+------
+	. modify register saving stack location
+
+	. enhance extension instructions optimizations
+
+V4.1.5:
+------
+	. enhance M0 stack access
+
+V4.1.4:
+------
+	. fixes of M0 specific optimizations
+
+V4.1.3:
+------
+	. support M0 devices
+
+V4.1.2:
+------
+	. optimizer fixes
+
+V4.1.1:
+------
+	. official release
+
+V4.0.1:
+------
+	. alpha release

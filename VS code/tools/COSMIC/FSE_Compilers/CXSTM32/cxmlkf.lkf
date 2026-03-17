@@ -1,0 +1,23 @@
+#	LINK COMMAND FILE FOR TEST PROGRAM
+#	Copyright (c) 2010 by COSMIC Software
+#
++seg .vector -b 0		# vectors start address
++seg .text -b 0x1000 -n .text	# program start address
++seg .const -a .text		# constants follow code
++seg .data -b 0x20000000	# data start address
++def __sbss=@.bss		# bss start address
+
+# Put your interrupt vectors file here if needed
+<VECTOR_FILE>
+
+# Put your startup file here
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\crts.cxm"
+
+# Put your files here
+<FILE_LIST>
+
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\libi.cxm"
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\libm.cxm"
+
++def __memory=@.bss		# symbol used by library
++def __stack=0x802000		# stack pointer initial value

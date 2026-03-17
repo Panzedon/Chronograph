@@ -1,0 +1,18 @@
+#	Link command file for test program
+#	Copyright (c) 2011 by COSMIC Software
+#
++seg .vector -b 0x0000 -m 0x1000 -n vector	# interrupt tables
++seg .sconst -b 0x1000 -m 0xf000 -r2 -n sconst	# constants follow vectors
++seg .text -a sconst -r2 -it -n text		# program follow constants
++seg .sdata -b 0x20000000 -o 0x0000 -m 0x1000 -r2 -id -n sdata	# data start address
++seg .sbss -a sdata -n sbss			# uninitialized data
+vector.o					# interrupt vectors
+/usr/lib/crts.cxm
+acia.o						# application program
+/usr/lib/libis.cxm
+/usr/lib/libm.cxm
++def __sram=pstart(sbss)			# bss start address
++def __eram=pend(sbss)				# bss end address
++def __stack=0x20010000				# stack pointer initial value
++def __sdata=pstart(sdata)			# ram start address
++def __memory=end(sbss)				# symbol used by library

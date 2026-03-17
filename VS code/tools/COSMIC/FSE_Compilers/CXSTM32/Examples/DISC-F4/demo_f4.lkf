@@ -1,0 +1,31 @@
+##	link command file for STM32F407VG
+##	Copyright (c) 2015 by COSMIC Software
+##
++seg .vector -b 0x8000000 -o0 -m 0x10000 -n .vector	# vectors start address
++seg .sconst -a .vector -n .sconst -r2			# short constants follow vectors
++seg .const -a .sconst -m 0x100000 -n .const		# large constants follow short constants
++seg .text -a .const -n .text				# program follow constants
++seg .sdata -b 0x20000000 -o0 -m 0x1000 -n .sdata -r2 -id # short data start address
++seg .sbss -a .sdata -n .sbss				# short bss follow short data
++seg .bss -a .sbss -o0 -m 0x20000 -n .bss		# large bss follow short bss
++seg .data -a .bss -n .data				# large data follow large bss
+
+## interrupt vectors
+"demo_f4_vector.o"
+
+## startup file
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\crtsi.cxm"	# Startup routine
+
+## application files
++inc "demo_f4.obl"
+
+## libraries
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\libilc.cxm"	# C Library
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\libm.cxm"	# Machine Library
+
+## symbols
++def __sram=pstart(.sbss)			# bss start address
++def __eram=pend(.bss)				# bss end address
++def __sdata=pstart(.sdata)			# start of based data
++def __stack=0x20020000				# stack pointer initial value
++def __memory=pend(.data)			# symbol used by library

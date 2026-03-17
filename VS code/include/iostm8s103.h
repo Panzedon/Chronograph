@@ -3,6 +3,25 @@
  */
 #ifndef _IOSTM8S103_H_
 #define _IOSTM8S103_H_
+
+#ifdef __INTELLISENSE__
+    #define INTERRUPT_
+    #define FAR_
+    #define NEAR_
+    #define TINY_
+    #define ASM_(x)
+#endif
+
+/* Это видит ТОЛЬКО компилятор Cosmic. 
+   VS Code проигнорирует этот блок, потому что он всегда 
+   считает __INTELLISENSE__ истиной. */
+#ifndef __INTELLISENSE__
+    #define INTERRUPT_ @interrupt
+    #define FAR_       @far
+    #define NEAR_      @near
+    #define TINY_      @tiny
+    #define ASM_(x)    _asm(x)
+#endif
 /*	PORTS section
  */
 /*	Port A

@@ -1,0 +1,79 @@
+[Assembler]
+Cmd=cacorm
+
+[Compiler]
+Cmd=cxcorm -v +debug
+
+[Linker]
+Cmd=clnk -o test.cxm test.lkf
+
+[Cobj]
+Cmd=cobj
+
+[Cprd]
+Cmd=cprd
+
+[Chex]
+Cmd=Chex
+
+[Clabs]
+Cmd=Clabs
+
+[Libs]
+Dir="C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib"
+1=4K Data C64K
+2=4K Data Large constants
+3=Large Data C64K
+4=Large Data and constants
+5=Large Data C64K and FPU
+6=Large Data and Constants and FPU
+7=4K Data C64K and FPU
+8=4K Data Large constants and FPU
+
+[4K Data C64K]
+1=libds.cxm      (The Double Precision library)
+2=libfs.cxm      (The Single Precision library)
+3=libis.cxm      (The Integer only library)
+4=libm.cxm       (The Machine library)
+
+[4K Data Large constants]
+1=libdsc.cxm     (The Double Precision library)
+2=libfsc.cxm     (The Single Precision library)
+3=libisc.cxm     (The Integer only library)
+4=libm.cxm       (The Machine library)
+
+[Large Data C64K]
+1=libdl.cxm      (The Double Precision library)
+2=libfl.cxm      (The Single Precision library)
+3=libil.cxm      (The Integer only library)
+4=libm.cxm       (The Machine library)
+
+[Large Data and Constants]
+1=libdlc.cxm     (The Double Precision library)
+2=libflc.cxm     (The Single Precision library)
+3=libilc.cxm     (The Integer only library)
+4=libm.cxm       (The Machine library)
+
+[Large Data C64K and FPU]
+1=libfpul.cxm    (The Single Precision library)
+2=libil.cxm      (The Integer only library)
+3=libm.cxm       (The Machine library)
+
+[Large Data and Constants and FPU]
+1=libfpulc.cxm   (The Single Precision library)
+2=libil.cxm      (The Integer only library)
+3=libm.cxm       (The Machine library)
+
+[4K Data C64K and FPU]
+1=libfpus.cxm    (The Single Precision library)
+2=libil.cxm      (The Integer only library)
+3=libm.cxm       (The Machine library)
+
+[4K Data Large constants and FPU]
+1=libfpusc.cxm   (The Single Precision library)
+2=libil.cxm      (The Integer only library)
+3=libm.cxm       (The Machine library)
+
+[DEFLIBS]
+1=libis.cxm
+2=libm.cxm

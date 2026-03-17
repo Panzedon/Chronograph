@@ -1,0 +1,17 @@
+cxcorm
+M,-pc99,Enable C99 compatibility,116
+G,+modlc,Unlimited Data and constants,114,+mods,+modsc,+modl
+G,+modl,Unlimited Data 64K constants,113,+mods,+modsc,+modlc
+G,+modsc,4K data Unlimited constants,112,+mods,+modl,+modlc
+G,+mods,4K data 64K constants,111,+modsc,+modl,+modlc
+M,+warn,Enable warnings,110
+G,+fpu,Use FPU (Float only),109
+O,+split,Split functions in different sections (allows unused functions removal by linker),108
+M,+rev,Number bits from MSB to LSB in bitfields,107
+M,+debug,Generate Debug Information,106
+G,+nobss,Do not use the .bss section,105
+G,+sprec,Force single precision floating point,104
+M,+proto,Force prototyping,103
+M,+strict,Enforce Type Checking,102
+L,-l,Generate Listings,101
+G,-v,Verbose Mode,100

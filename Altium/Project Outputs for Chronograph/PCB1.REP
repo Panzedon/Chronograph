@@ -2,13 +2,73 @@
 FileName = PCB1.GBR
 AutoAperture = True
 *************************************************************
-Generating : Mechanical 1
-      File : PCB1_Mechanical_1.gbr
+Generating : Top Layer
+      File : PCB1_Copper_Signal_Top.gbr
 
-    Adding Layer      : Mechanical 1
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
 
 
 Used DCodes :
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D50
+    D54
+    D64
+    D65
+    D66
+    D67
+    D68
+    D69
+    D70
+    D71
+    D72
+    D73
+    D74
+    D75
+    D76
+    D77
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : PCB1_Legend_Top.gbr
+
+    Adding Layer      : Top Overlay
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
 *************************************************************
 
 *************************************************************
@@ -23,6 +83,18 @@ Generating : Bottom Paste
 
 
 Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Bottom Overlay
+      File : PCB1_Legend_Bot.gbr
+
+    Adding Layer      : Bottom Overlay
+
+
+Used DCodes :
+    D11
+    D14
 *************************************************************
 
 *************************************************************
@@ -71,10 +143,8 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
-Generating : Bottom Solder
-      File : PCB1_Soldermask_Bot.gbr
-
-    Adding Layer      : Bottom Solder
+Generating : Bottom Layer
+      File : PCB1_Copper_Signal_Bot.gbr
 
     Adding Layer      : Bottom Layer
 
@@ -83,15 +153,29 @@ Generating : Bottom Solder
 
 Used DCodes :
     D54
-    D55
-    D56
-    D57
-    D58
-    D59
-    D60
-    D61
-    D62
-    D63
+    D64
+    D65
+    D67
+    D68
+    D69
+    D70
+    D71
+    D72
+    D73
+    D74
+    D75
+    D76
+    D77
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : PCB1_Mechanical_1.gbr
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
 *************************************************************
 
 *************************************************************
@@ -110,20 +194,20 @@ Used DCodes :
     D20
     D21
     D22
-    D25
+    D24
     D26
     D27
-    D28
     D29
+    D30
     D31
-    D32
     D33
+    D34
     D35
     D36
     D38
-    D39
+    D40
+    D41
     D42
-    D43
     D44
     D45
     D46
@@ -147,35 +231,10 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
-Generating : Bottom Overlay
-      File : PCB1_Legend_Bot.gbr
+Generating : Bottom Solder
+      File : PCB1_Soldermask_Bot.gbr
 
-    Adding Layer      : Bottom Overlay
-
-
-Used DCodes :
-    D10
-    D14
-*************************************************************
-
-*************************************************************
-Generating : Top Overlay
-      File : PCB1_Legend_Top.gbr
-
-    Adding Layer      : Top Overlay
-
-
-Used DCodes :
-    D10
-    D11
-    D12
-    D13
-    D14
-*************************************************************
-
-*************************************************************
-Generating : Bottom Layer
-      File : PCB1_Copper_Signal_Bot.gbr
+    Adding Layer      : Bottom Solder
 
     Adding Layer      : Bottom Layer
 
@@ -183,75 +242,16 @@ Generating : Bottom Layer
 
 
 Used DCodes :
+    D54
+    D55
     D56
-    D64
-    D65
-    D67
-    D68
-    D69
-    D70
-    D71
-    D72
-    D73
-    D74
-    D75
-    D76
-    D77
-*************************************************************
-
-*************************************************************
-Generating : Top Layer
-      File : PCB1_Copper_Signal_Top.gbr
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D19
-    D20
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-    D39
-    D40
-    D41
-    D42
-    D43
-    D44
-    D45
-    D50
-    D56
-    D64
-    D65
-    D66
-    D67
-    D68
-    D69
-    D70
-    D71
-    D72
-    D73
-    D74
-    D75
-    D76
-    D77
+    D57
+    D58
+    D59
+    D60
+    D61
+    D62
+    D63
 *************************************************************
 
 *************************************************************

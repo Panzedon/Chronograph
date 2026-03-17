@@ -1,0 +1,191 @@
+[TARGET]
+Name=K21DN512
+[LINK]
+##	link command file for K21DN512
+##	Copyright (c) 2015 by COSMIC Software
+##
++seg .vector -b 0x0 -m 0x400 -n .vector			# vectors start address
+#if defined(__OPT_PSPLIT__)
+-k
+#endif
++seg .sconst -b 0x410 -m 0xfbf0 -n .sconst -r2		# short constants follow vectors
++seg .const -a .sconst -m 0x7fbf0 -n .const		# large constants follow short constants
++seg .text -a .const -n .text				# program follow constants
++seg .eeprom -b 0x10000000 -m 0x1000 -n .eeprom		# eeprom start address
++seg .sdata -b 0x20000000 -o0 -m 0x1000 -n .sdata -r2 -id # short data start address
++seg .sbss -a .sdata -n .sbss				# short bss follow short data
++seg .bss -a .sbss -o0 -m 0x8000 -n .bss		# large bss follow short bss
++seg .data -a .bss -n .data				# large data follow large bss
+
+## interrupt vectors
+#if defined(__STP_VECTOR__)
+__STP_VECTORFILE__
+#endif
+
+## startup file
+#if defined(__STP_CRTS__)
+"crts.cxm"
+#elif defined(__STP_CRTSI__)
+"crtsi.cxm"
+#endif
+
+## application files
+__STP_FILES__
+
+## libraries
+#if defined(__OPT_PMODS__)
+#if defined(__STP_FLOAT__)
+#if defined(__OPT_PFPU__)
+"libfpus.cxm"
+#elif defined(__OPT_PSPREC__)
+"libfs.cxm"
+#else
+"libds.cxm"
+#endif
+#endif
+"libilc.cxm"			# C library (if needed)
+#elif defined(__OPT_PMODSC__)
+#if defined(__STP_FLOAT__)
+#if defined(__OPT_PFPU__)
+"libfpusc.cxm"
+#elif defined(__OPT_PSPREC__)
+"libfsc.cxm"
+#else
+"libdsc.cxm"
+#endif
+#endif
+"libisc.cxm"			# C library (if needed)
+#elif defined(__OPT_PMODL__)
+#if defined(__STP_FLOAT__)
+#if defined(__OPT_PFPU__)
+"libfpul.cxm"
+#elif defined(__OPT_PSPREC__)
+"libfl.cxm"
+#else
+"libdl.cxm"
+#endif
+#endif
+"libil.cxm"			# C library (if needed)
+#else
+#if defined(__STP_FLOAT__)
+#if defined(__OPT_PFPU__)
+"libfpulc.cxm"
+#elif defined(__OPT_PSPREC__)
+"libflc.cxm"
+#else
+"libdlc.cxm"
+#endif
+#endif
+"libilc.cxm"			# C library (if needed)
+#endif
+"libm.cxm"			# machine library
+
+## symbols
++def __sram=pstart(.sbss)			# bss start address
++def __eram=pend(.bss)				# bss end address
++def __sdata=pstart(.sdata)			# start of based data
++def __stack=0x20008000				# stack pointer initial value
++def __memory=pend(.data)			# symbol used by library
+[VECTOR]
+/*	INTERRUPT VECTOR TABLE FOR K21DN512
+ *	Copyright (c) 2015 by COSMIC Software
+ */
+extern void _stext(void);	/* startup code */
+extern int _stack;		/* stack address */
+
+/*	dummy interrupt function
+ */
+@interrupt void _dummit(void)
+	{
+	}
+
+#pragma section const {vector}
+
+/*	vector table
+ */
+void (* const _vectab[81])(void) = {
+/* 0 */		(void *)&_stack,	/* Initial Stack Pointer */
+/* 1 */		_stext,			/* Initial Program Counter */
+/* 2 */		_dummit,		/* Non-maskable Interrupt (NMI) */
+/* 3 */		_dummit,		/* Hard Fault */
+/* 4 */		_dummit,		/* MemManage Fault */
+/* 5 */		_dummit,		/* Bus Fault */
+/* 6 */		_dummit,		/* Usage fault */
+/* 7 */		_dummit,		/* reserved */
+/* 8 */		_dummit,		/* reserved */
+/* 9 */		_dummit,		/* reserved */
+/* 10 */	_dummit,		/* reserved */
+/* 11 */	_dummit,		/* Supervisor Call (SVCall) */
+/* 12 */	_dummit,		/* Debug Monitor */
+/* 13 */	_dummit,		/* reserved */
+/* 14 */	_dummit,		/* Pendable Service Request */
+/* 15 */	_dummit,		/* System Tick Timer */
+
+/* 16 */	_dummit,		/* DMA channel 0 transfer complete */
+/* 17 */	_dummit,		/* DMA channel 1 transfer complete */
+/* 18 */	_dummit,		/* DMA channel 2 transfer complete */
+/* 19 */	_dummit,		/* DMA channel 3 transfer complete */ 
+/* 20 */	_dummit,		/* DMA channel 4 transfer complete */ 
+/* 21 */	_dummit,		/* DMA channel 5 transfer complete */ 
+/* 22 */	_dummit,		/* DMA channel 6 transfer complete */ 
+/* 23 */	_dummit,		/* DMA channel 7 transfer complete */ 
+/* 24 */	_dummit,		/* DMA channel 8 transfer complete */ 
+/* 25 */	_dummit,		/* DMA channel 9 transfer complete */ 
+/* 26 */	_dummit,		/* DMA channel 10 transfer complete */ 
+/* 27 */	_dummit,		/* DMA channel 11 transfer complete */ 
+/* 28 */	_dummit,		/* DMA channel 12 transfer complete */ 
+/* 29 */	_dummit,		/* DMA channel 13 transfer complete */ 
+/* 30 */	_dummit,		/* DMA channel 14 transfer complete */ 
+/* 31 */	_dummit,		/* DMA channel 15 transfer complete */ 
+/* 32 */	_dummit,		/* DMA error channel 0-15 */
+/* 33 */	_dummit,		/* MCM */
+/* 34 */	_dummit,		/* FLASH command complete */
+/* 35 */	_dummit,		/* FLASH read collision */
+/* 36 */	_dummit,		/* Low voltage detect */
+/* 37 */	_dummit,		/* LLWU */
+/* 38 */	_dummit,		/* Watchdog/EWM */
+/* 39 */	_dummit,		/* RNG */
+/* 40 */	_dummit,		/* I2C0 */
+/* 41 */	_dummit,		/* I2C1 */
+/* 42 */	_dummit,		/* SPI0 */
+/* 43 */	_dummit,		/* SPI1 */
+/* 44 */	_dummit,		/* I2S0 receive */
+/* 45 */	_dummit,		/* I2S0 transmit */
+/* 46 */	_dummit,		/* reserved */
+/* 47 */	_dummit,		/* UART0 status */
+/* 48 */	_dummit,		/* UART0 error */
+/* 49 */	_dummit,		/* UART1 status */
+/* 50 */	_dummit,		/* UART1 error */
+/* 51 */	_dummit,		/* UART2 status */
+/* 52 */	_dummit,		/* UART2 error */
+/* 53 */	_dummit,		/* UART3 status */
+/* 54 */	_dummit,		/* UART3 error */
+/* 55 */	_dummit,		/* ADC0 */
+/* 56 */	_dummit,		/* CMP0 */
+/* 57 */	_dummit,		/* CMP1 */
+/* 58 */	_dummit,		/* FTM0 */
+/* 59 */	_dummit,		/* FTM1 */
+/* 60 */	_dummit,		/* FTM2 */
+/* 61 */	_dummit,		/* CMT */
+/* 62 */	_dummit,		/* RTC alarm */
+/* 63 */	_dummit,		/* RTC seconds */
+/* 64 */	_dummit,		/* PIT channel 0 */
+/* 65 */	_dummit,		/* PIT channel 1 */
+/* 66 */	_dummit,		/* PIT channel 2 */
+/* 67 */	_dummit,		/* PIT channel 3 */
+/* 68 */	_dummit,		/* PDB */
+/* 69 */	_dummit,		/* USB OTG */
+/* 70 */	_dummit,		/* USB charger detect */
+/* 71 */	_dummit,		/* reserved */
+/* 72 */	_dummit,		/* DAC0 */
+/* 73 */	_dummit,		/* MCG */
+/* 74 */	_dummit,		/* Low Power Timer */
+/* 75 */	_dummit,		/* Port A Pin Detect */
+/* 76 */	_dummit,		/* Port B Pin Detect */
+/* 77 */	_dummit,		/* Port C Pin Detect */
+/* 78 */	_dummit,		/* Port D Pin Detect */
+/* 79 */	_dummit,		/* Port E Pin Detect */
+/* 80 */	_dummit,		/* Software Interrupt */
+	};
+[OPTION]
++modlc

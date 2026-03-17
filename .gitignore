@@ -1,4 +1,13 @@
 #gitignore
+
 .vscode/
 
+Debug/
+
 *.o
+*.elf
+*.hex
+*.map
+*.sm8
+*.ls
+*.sym

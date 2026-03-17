@@ -1,0 +1,31 @@
+##	link command file for K22FN512
+##	Copyright (c) 2015 by COSMIC Software
+##
++seg .vector -b 0x0 -m 0x400 -n .vector			# vectors start address
++seg .sconst -b 0x410 -m 0xfbf0 -n .sconst -r2		# short constants follow vectors
++seg .const -a .sconst -m 0x7fbf0 -n .const		# large constants follow short constants
++seg .text -a .const -n .text				# program follow constants
++seg .sdata -b 0x20000000 -o0 -m 0x1000 -n .sdata -r2 -id # short data start address
++seg .sbss -a .sdata -n .sbss				# short bss follow short data
++seg .bss -a .sbss -o0 -m 0x10000 -n .bss		# large bss follow short bss
++seg .data -a .bss -n .data				# large data follow large bss
+
+## interrupt vectors
+"demo_k22_vector.o"
+
+## startup file
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\crtsi.cxm"	# Startup routine
+
+## application files
++inc "demo_k22.obl"
+
+## libraries
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\libilc.cxm"	# C Library
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM32\Lib\libm.cxm"	# Machine Library
+
+## symbols
++def __sram=pstart(.sbss)			# bss start address
++def __eram=pend(.bss)				# bss end address
++def __sdata=pstart(.sdata)			# start of based data
++def __stack=0x20010000				# stack pointer initial value
++def __memory=pend(.data)			# symbol used by library
