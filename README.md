@@ -35,8 +35,15 @@
 | Калібр            | 6 мм BB (страйкбол) |
 
 ### 📂 Структура проєкту
-- **Altium** — принципова схема та плата (Altium Designer).
-- **VsCode** — середовище розробки (C, COSMIC, stm8flash, ST-LINK).
+- **Altium** — принципова схема та плата (Altium Designer) і системні файли.
+- **Docs** - архів сверління для заводу, BOM і документація
+- **VsCode** — середовище розробки (C, COSMIC, stm8flash, ST-LINK) і код програми.
+
+## 📽️ Відео демонстрація роботи
+
+У цьому відео продемонстровано процес вимірювання швидкості та скорострільності страйкбольного приводу (AEG) за допомогою розробленого хронографа. 
+
+[![Дивитися відео](https://img.youtube.com/vi/bznoCWF54Is/0.jpg)](https://youtube.com/shorts/bznoCWF54Is)
 
 ✍️ **Автор:** Матвій Шульга
 
@@ -72,8 +79,13 @@ Powered via **USB Type-C**, uses **two IR (Infrared) beams** to detect BB flight
 | Sensors           | 2 IR beams |
 | Caliber           | 6 mm BBs |
 
-### 📂 Project structure
-- **Altium** — schematics and PCB (Altium Designer).
-- **VsCode** — development environment (C, COSMIC, stm8flash, ST-LINK).
+### 📂 Project Structure
+- **Altium** — Schematic design, PCB layout (Altium Designer), and project system files.
+- **Docs** — Manufacturing files (Drill/Gerber), Bill of Materials (BOM), and technical documentation.
+- **VsCode** — Development environment (C, COSMIC, stm8flash, ST-LINK) and source code.
 
-✍️ **Developed by:** Matvei Shulga
+## 📽️ Video Demonstration
+
+This video demonstrates the measurement of muzzle velocity and rate of fire (ROF) for an airsoft replica (AEG) using the developed chronograph.
+
+[![Watch Video](https://img.youtube.com/vi/bznoCWF54Is/0.jpg)](https://youtube.com/shorts/bznoCWF54Is)

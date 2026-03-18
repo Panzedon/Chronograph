@@ -44,7 +44,6 @@ void Buttons_Init(void) {
  * Повинна викликатися рівно раз на 1 мс.
  */
 void Buttons_Tick(void) {
-    /* СУВОРИЙ C89: Всі змінні оголошуються на самому початку */
     unsigned char i;
     unsigned char pins_state;
     unsigned char is_pressed[2];
@@ -88,7 +87,6 @@ void Buttons_Tick(void) {
  * @return btn_event_t Тип події (EVENT_NONE, EVENT_SHORT_PRESS, EVENT_LONG_PRESS).
  */
 btn_event_t Buttons_GetEvent(button_id_t btn_id) {
-    /* СУВОРИЙ C89: Змінна на початку */
     btn_event_t current_event;
     
     _asm("sim"); 
