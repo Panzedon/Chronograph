@@ -6,7 +6,7 @@
 #define DEBOUNCE_TIME_MS 30
 #define LONG_PRESS_TIME_MS 1000
 
-/* Використовуємо стандартні типи C, щоб не залежати від інших файлів */
+
 typedef struct {
     unsigned int  counter;    /* Лічильник мілісекунд утримання */
     unsigned char state;      /* 0 = відпущена, 1 = натиснута, 2 = утримання */
@@ -35,6 +35,7 @@ void Buttons_Init(void) {
     /* TIM4_IER |= 0x01; */
     TIM4_CR1 |= 0x01; 
 }
+
 
 /**
  * @brief Кінцевий автомат (стейт-машина) обробки фізичного стану кнопок.
@@ -87,6 +88,7 @@ void Buttons_Tick(void) {
  * @return btn_event_t Тип події (EVENT_NONE, EVENT_SHORT_PRESS, EVENT_LONG_PRESS).
  */
 btn_event_t Buttons_GetEvent(button_id_t btn_id) {
+    /* СУВОРИЙ C89: Змінна на початку */
     btn_event_t current_event;
     
     _asm("sim"); 

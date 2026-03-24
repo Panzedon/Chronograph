@@ -20,9 +20,8 @@ static FAR_ INTERRUPT_ void NonHandledInterrupt (void)
     return;
 }
 
-extern void _stext();     /* startup routine */
+extern void _stext();     
 
-/* Подключаем наш обработчик оптики из chrono.c */
 extern FAR_ INTERRUPT_ void Chrono_HandleInterrupt(void);
 
 extern FAR_ INTERRUPT_ void Chrono_OverflowInterrupt(void);
@@ -35,7 +34,7 @@ struct interrupt_vector const _vectab[] = {
     {0x82, NonHandledInterrupt}, /* irq2  */
     {0x82, NonHandledInterrupt}, /* irq3  */
     {0x82, NonHandledInterrupt}, /* irq4  */
-    {0x82, NonHandledInterrupt}, /* irq5  - ПРЕРЫВАНИЕ ПОРТА C (PC3, PC4) */
+    {0x82, NonHandledInterrupt}, /* irq5  */
     {0x82, NonHandledInterrupt}, /* irq6  */
     {0x82, NonHandledInterrupt}, /* irq7  */
     {0x82, NonHandledInterrupt}, /* irq8  */

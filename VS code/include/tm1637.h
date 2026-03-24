@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+
+
 /**
  * @brief Ініціалізація пінів та протоколу для роботи з TM1637
  */
@@ -25,7 +27,7 @@ void TM1637_Clear(void);
  * @param length Кількість розрядів для виводу
  * @param pos Позиція (зміщення) на екрані
  */
-void TM1637_SetSegments(const uint8_t *segments, uint8_t length, uint8_t pos);
+static  void TM1637_SetSegments(const uint8_t *segments, uint8_t length, uint8_t pos);
 
 /**
  * @brief Вивід цілого числа на індикатор
@@ -57,5 +59,13 @@ void TM1637_Display000(void);
  * @brief Вивід нулів з крапкою (формат 0.00) для режиму енергії
  */
 void TM1637_Display0_00(void);
+
+static void TM1637_ShowWord(uint8_t l1, uint8_t l2, uint8_t l3);
+
+void ShowMode_Speed(void);
+void ShowMode_Energy(void);
+void ShowMode_ROF(void);
+void ShowMode_Weight(void);
+void ShowMode_HI(void);
 
 #endif

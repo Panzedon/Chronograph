@@ -4,6 +4,20 @@
 #define CLK_PIN (1 << 4) /* PB4 */
 #define DIO_PIN (1 << 5) /* PB5 */
 
+/* --- Шрифти --- */
+#define L_H 0x76 
+#define L_I 0x06 
+#define L_S 0x6D
+#define L_P 0x73
+#define L_d 0x5E
+#define L_E 0x79
+#define L_n 0x54
+#define L_r 0x50
+#define L_o 0x5C
+#define L_F 0x71
+#define L_b 0x7C
+#define L_blank 0x00
+
 /* Коди символів: 0-9 */
 const uint8_t SEG[] = {
     0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F
@@ -88,10 +102,6 @@ void TM1637_SetBrightness(uint8_t br) {
     _brightness = (br > 7) ? 7 : br;
 }
 
-/* ====================================================================
- * CORE FUNCTION 
- * ==================================================================== */
-
 /**
  * @brief Базова функція для виведення довільних сегментів на екран.
  * @details Виконує повну транзакцію по I2C-подібній шині:
@@ -103,7 +113,7 @@ void TM1637_SetBrightness(uint8_t br) {
  * @param length Кількість символів для виведення.
  * @param pos Зміщення (від 0) з якого почати виведення.
  */
-void TM1637_SetSegments(const uint8_t *segments, uint8_t length, uint8_t pos) {
+static void TM1637_SetSegments(const uint8_t *segments, uint8_t length, uint8_t pos) {
     uint8_t i;
     
     _start(); 
@@ -130,10 +140,6 @@ void TM1637_Clear(void) {
     static const uint8_t empty[4] = {0, 0, 0, 0};
     TM1637_SetSegments(empty, 4, 0);
 }
-
-/* ====================================================================
- * ФУНКЦІЇ АДАПТОВАНІ ПІД 3-РОЗРЯДНИЙ ІНДИКАТОР
- * ==================================================================== */
 
 /**
  * @brief Конвертує число у масив сегментів та виводить з кастомними крапками.
@@ -207,3 +213,23 @@ void TM1637_DisplayXXX(uint8_t d1, uint8_t d2, uint8_t d3) {
     segs[3] = 0x00;                /* Четвертий розряд відсутній */
     TM1637_SetSegments(segs, 4, 0);
 }
+
+/**
+ * @brief Допоміжна функція для виведення 3-х літерного слова на дисплей.
+ * @details Формує масив сегментів з трьох переданих символів (четвертий 
+ * розряд гаситься нулем) та відправляє на дисплей.
+ * @param l1 Код сегментів для першої літери.
+ * @param l2 Код сегментів для другої літери.
+ * @param l3 Код сегментів для третьої літери.
+ */
+static void TM1637_ShowWord(uint8_t l1, uint8_t l2, uint8_t l3) {
+    uint8_t s[4];
+    s[0] = l1; s[1] = l2; s[2] = l3; s[3] = 0x00;
+    TM1637_SetSegments(s, 4, 0);
+}
+
+void ShowMode_Speed(void)  { TM1637_ShowWord(L_S, L_P, L_d); }
+void ShowMode_Energy(void) { TM1637_ShowWord(L_E, L_n, L_E); }
+void ShowMode_ROF(void)    { TM1637_ShowWord(L_r, L_o, L_F); }
+void ShowMode_Weight(void) { TM1637_ShowWord(L_b, L_b, L_blank); }
+void ShowMode_HI(void) {TM1637_ShowWord(L_blank, L_H, L_I); }

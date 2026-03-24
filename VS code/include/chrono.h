@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+void CPU_Speed_Init(void);
+void Enable_Interrupt(void);
+
 /**
  * @brief Ініціалізація таймера TIM1 та оптичних датчиків
  * @note Використовує піни PC3 та PC4 для захоплення сигналу
